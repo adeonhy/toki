@@ -1,0 +1,7 @@
+actions/index.spec.js:19:  it('toggleTodo should create TOGGLE_TODO action', () => {
+actions/index.spec.js:21:      type: 'TOGGLE_TODO',
+actions/index.js:14:  type: 'TOGGLE_TODO',
+reducers/todos.spec.js:82:  it('should handle TOGGLE_TODO', () => {
+reducers/todos.spec.js:95:        type: 'TOGGLE_TODO',
+reducers/todos.js:9:    case 'TOGGLE_TODO':
+reducers/todos.js:30:    case 'TOGGLE_TODO':
