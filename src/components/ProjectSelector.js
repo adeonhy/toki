@@ -22,19 +22,19 @@ export default class ProjectSelector extends Component {
 
   handleChange = (event, index, value) => {
     this.setState({value})
-    this.props.onProjectSetCallback(value)
+    this.props.onSetProjectName(value)
   }
 
   render() {
     return (
       <div>
-        <SelectField autoWidth="true"
+        <SelectField 
           floatingLabelText={this.props.floatingLabelText}
           underlineShow={false}
-          value={this.state.value}
+          value={this.props.value}
           onChange={this.handleChange}>
-          {projects.map(p => {
-            return  (<MenuItem value={p} primaryText={p} />)
+          {projects.map((p,i) => {
+            return  (<MenuItem key={i} value={p} primaryText={p} />)
           })}
         </SelectField>
       </div>

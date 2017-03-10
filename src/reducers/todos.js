@@ -15,8 +15,6 @@ const todo = (state, action) => {
         ...state,
         completed: !state.completed
       }
-    case 'ADD_TIME_LOG':
-      return { log: action.log }
     default:
       return state
   }
@@ -33,11 +31,6 @@ const todos = (state = [], action) => {
       return state.map(t =>
         todo(t, action)
       )
-    case 'ADD_TIME_LOG':
-      return [
-        ...state,
-        todo(undefined, action)
-      ]
     default:
       return state
   }

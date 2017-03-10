@@ -12,48 +12,58 @@ import TimerButton from './TimerButton'
 import TextField from 'material-ui/TextField'
 
 export default class MainToolBar extends Component {
-  // constructor(props) {
-    // super(props)
-    // this.state = {
-      // projectName: "",
-      // startTime: null,
-      // endTime: null
-    // }
-  // }
-  
-
-  // handleChange = (event, index, value) => this.setState({value})
-  state = {
-    projectName: ""
+  constructor(props) {
+    super(props)
   }
 
   onLogAdd = (time) => {
-    this.props.onLogAddCallback({
-      projectName: this.state.projectName,
-      startTime: time.startTime,
-      endTime: time.endTime,
-      elapsedTime: time.elapsedTime
-    })
+    // this.props.onLogAdd({
+      // projectName: this.state.projectName,
+      // startTime: time.startTime,
+      // endTime: time.endTime,
+      // elapsedTime: time.elapsedTime
+    // })
   }
 
-  onProjectSet = (projectName) => {
-    this.setState({projectName})
+  onTimerStart = this.props.onSetStartTime
+  onTimerEnd = time => {
+    this.props.onSetEndTime(time)
+    this.props.onLogAdd({
+      projectName: this.props.projectName,
+      startTime: this.props.startTime,
+      endTime: time,
+      description: this.props.description
+    })
   }
 
   style = {
     backgroundColor: 'white'
   }
 
+  onDescriptionChangeHandler = (event, index, value) => {
+    this.props.onSetDescription(event.target.value)
+  }
+
   render() {
     return (
       <Toolbar style={this.style}>
         <ToolbarGroup firstChild={true}>
-        <ProjectSelector onProjectSetCallback={this.onProjectSet}
+        <ProjectSelector 
+          onSetProjectName={this.props.onSetProjectName}
+          value={this.props.projectName}
           floatingLabelText="Project"/>
-        <TextField hintText="Description" underlineShow={false} multiLine={true} rowsMax={2}/>
+        <TextField hintText="Description" 
+          onChange={this.onDescriptionChangeHandler}
+          value={this.props.description}
+          underlineShow={false} 
+          multiLine={true} rowsMax={2}/>
         </ToolbarGroup>
         <ToolbarGroup>
-        <TimerButton onLogAddCallback={this.onLogAdd}/>
+        <TimerButton 
+          onLogAddCallback={this.onLogAdd}
+          onTimerStart={this.onTimerStart}
+          onTimerEnd={this.onTimerEnd}
+        />
         <FontIcon className="muidocs-icon-custom-sort" />
         <ToolbarSeparator />
         <IconMenu 

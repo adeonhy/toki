@@ -15,6 +15,7 @@ export default class TimerButton extends Component {
       clearInterval(this.interval);
       const startTime = this.state.startTime
       const endTime = Date.now()
+      this.props.onTimerEnd(endTime)
       this.props.onLogAddCallback({
         startTime: this.formatTime(startTime),
         endTime: this.formatTime(endTime),
@@ -25,10 +26,12 @@ export default class TimerButton extends Component {
         startTime: undefined
       })
     } else {
+      const startTime = Date.now()
       this.interval = setInterval(this.tick, 1000);
+      this.props.onTimerStart(startTime)
       this.setState({
         nowRecording: true,
-        startTime: Date.now(),
+        startTime 
       })
     }
   }
@@ -45,7 +48,7 @@ export default class TimerButton extends Component {
   formatTime = (unixtime) => {
     const t = unixtime % (1000*60*60*24)
     const hours = ("0" + Math.floor(t / (1000*60*60))).substr(-2)
-    const minutes = ("0" + Math.floor(t / (1000*60))).substr(-2)
+    const minutes = ("0" + Math.floor((t / (1000*60))) % 60).substr(-2)
     const seconds = ("0" + Math.floor((t / 1000) % 60)).substr(-2)
     return `${hours}:${minutes}:${seconds}`
   }

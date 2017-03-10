@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux'
 import todos from './todos'
 import visibilityFilter from './visibilityFilter'
+import logs from './logs'
+import currentTask from './currentTask'
 
-const todoApp = combineReducers({
+const tokiApp = combineReducers({
   todos,
-  visibilityFilter
+  visibilityFilter,
+  logs,
+  currentTask
 })
 
-export default todoApp
+export default tokiApp

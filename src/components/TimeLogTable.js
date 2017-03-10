@@ -15,19 +15,13 @@ export default class TimeLogTable extends Component {
     // height: '300px',
   // }
 
-  state = {
-    showCheckboxes: false,
-    value: 'undefined',
-    logs: []
-  }
+  // state = {
+    // showCheckboxes: false,
+    // value: 'undefined',
+    // logs: []
+  // }
 
   handleChange = (event, index, value) => this.setState({value});
-
-  addLog = (log) => {
-    this.setState({
-      logs: [...this.state.logs, log]
-    })
-  }
 
   render() {
     return (
@@ -42,7 +36,9 @@ export default class TimeLogTable extends Component {
           </TableRow>
         </TableHeader>
           <TableBody>
-            {this.state.logs.map(log => <TimeLogTableRow log={log} />)}
+            {this.props.logs.map(log => {
+              return <TimeLogTableRow log={log.log} />
+            })}
           </TableBody>
       </Table>
     )
